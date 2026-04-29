@@ -1,0 +1,32 @@
+
+name: Package
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Build package directory
+        run: |
+          make out/package VERSION="${GITHUB_REF_NAME#v}"
+
+      - name: Upload package directory
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-${{ github.ref_name }}
+          path: out/package/
+          include-hidden-files: true
+          if-no-files-found: error

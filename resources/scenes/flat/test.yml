@@ -1,0 +1,53 @@
+# welcome text
+- type: text
+  text: "the space"
+  pos: [1, 1]
+  font_size: 30
+  color: [0, 0, 0, 255]
+- type: text
+  text: "the space"
+  pos: [0, 0]
+  font_size: 30
+  color: [255, 255, 255, 255]
+
+# the player
+- type: player
+  pos: [-25, -35]
+  size: [50, 70]
+  idle_sprite: assets/images/GitlIdle.png
+  idle_count: 1
+  walk_sprite: assets/images/GitlWalk.png
+  walk_count: 6
+  frame_interval: 10
+
+- type: canvas
+  color: [255, 0, 0, 128]
+
+# not movable
+- type: solid_box
+  pos: [-200, -5]
+  size: [50, 100]
+  color: [0, 0, 0, 255]
+  weight: 0
+- type: solid_box
+  pos: [-420, -5]
+  size: [50, 100]
+  color: [0, 0, 0, 255]
+  weight: 0
+
+# movable
+- type: solid_box
+  pos: [-250, -35]
+  size: [50, 50]
+  color: [255, 0, 0, 128]
+  weight: 2
+- type: solid_box
+  pos: [-310, -35]
+  size: [50, 50]
+  color: [255, 0, 0, 128]
+  weight: 2
+- type: solid_box
+  pos: [-370, -35]
+  size: [50, 50]
+  color: [255, 0, 0, 128]
+  weight: 2
