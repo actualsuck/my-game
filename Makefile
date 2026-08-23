@@ -109,8 +109,9 @@ OUTPACKAGE ?= $(OUT)/package
 $(OUTPACKAGE): clean
 	mkdir -p $(dir $@)
 	@make LOCAL_DATA=y LOCAL_RESOURCES=y LOCAL_LIBS=y LIBS_RUNTIME=./ $(OUTJAR) $(RUNTIME_FILE)
-	mkdir -p $@/data
-	cp -r LICENSE $(OUTJAR) libs resources $@
+	mkdir -p $@/data $@/libs
+	cp -r LICENSE $(OUTJAR) resources $@
+	cp libs/*.jar $@/libs
 	cp $(RUNTIME_FILE) $@/.game-runtime
 
 $(OUT)/game-${VERSION}.zip: $(OUTPACKAGE)
