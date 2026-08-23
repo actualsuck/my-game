@@ -39,7 +39,7 @@ public class Game implements Tickable {
         instance = this;
 
         this.scene = new MainMenuScene();
-        this.runtimeFile = findRuntimeFile();
+        this.runtimeFile = RuntimeFile.findRuntimeFile();
         this.storage = new Storage(runtimeFile.findDataDirectory());
         this.resourceLoader = new ResourceLoader(
             runtimeFile.findResourcesLocation()
@@ -112,67 +112,6 @@ public class Game implements Tickable {
             if (!res) anim.onEnd();
             return !res;
         });
-    }
-
-    public static RuntimeFile findRuntimeFile() {
-        try {
-            System.out.println("searching for the runtime file. ...");
-            if (Files.exists(Path.of(".game-runtime"))) {
-                System.out.println("found on local!!");
-                return RuntimeFile.fromFile(
-                    Path.of(".game-runtime").toAbsolutePath().toFile()
-                );
-            }
-
-            System.out.println(
-                "put me in directory with .game-runtime you dumbass"
-            );
-            System.out.println("ok i will just use your HOME directory");
-            System.out.println(
-                "my runtime dir is now your home dir...........................................local/share/leeach-game"
-            );
-            System.out.println("can start crying ~");
-
-            // return null;
-
-            Path path = Path.of(
-                System.getProperty("user.home"),
-                ".local",
-                "share",
-                "leeach-game"
-            );
-
-            if (Files.exists(path.getParent())) {
-                System.out.println("GOD bless my ass");
-                System.out.println(
-                    "i finally found the directory to penetrate...."
-                );
-                Files.createDirectory(path);
-                return RuntimeFile.createDefault(path.resolve(".game-runtime"));
-            }
-
-            for (String hated : new String[] {
-                "family",
-                "mom",
-                "dad",
-                "grandmom",
-                "granddad",
-                "fatass cat",
-                "life",
-            }) {
-                System.out.println("I hate your " + hated);
-            }
-
-            path = Path.of(
-                System.getProperty("user.home"),
-                ".leeach-game-sorry-to-interrupt-here-dude-but-no-local-share-directory-uhh-nvm-just-fuck-yourself-ok-YOU-forced-me-to-do-that"
-            );
-
-            Files.createDirectories(path);
-            return RuntimeFile.createDefault(path.resolve(".game-runtime"));
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
     }
 
     public static StorageData getStorageData() {

@@ -108,7 +108,7 @@ OUTPACKAGE ?= $(OUT)/package
 
 $(OUTPACKAGE): clean
 	mkdir -p $(dir $@)
-	@make LOCAL_DATA=y LOCAL_RESOURCES=y LOCAL_LIBS=y LIBS_RUNTIME=./ $(OUTJAR) $(RUNTIME_FILE)
+	$(MAKE) LOCAL_DATA=y LOCAL_RESOURCES=y LOCAL_LIBS=y LIBS_RUNTIME=./ $(OUTJAR) $(RUNTIME_FILE)
 	mkdir -p $@/data $@/libs
 	cp -r LICENSE $(OUTJAR) resources $@
 	cp libs/*.jar $@/libs
@@ -128,7 +128,7 @@ package: $(OUT)/game-${VERSION}.zip \
 	$(OUT)/game-${VERSION}.tar.gz \
 	$(OUT)/game-${VERSION}.tar.xz
 fatjar: clean
-	$(MAKE) LOCAL_DATA=n LOCAL_RESOURCES=n LOCAL_LIBS=n LIBS_RUNTIME=../ $(OUTJAR)
+	$(MAKE) LOCAL_DATA=n LOCAL_RESOURCES=n LOCAL_LIBS=n $(OUTJAR)
 	mv $(OUTJAR) $(OUT)/game-${VERSION}-fat.jar
 
 clean:
